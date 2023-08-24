@@ -3,11 +3,13 @@ package com.gdp.codetest.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gdp.codetest.model.Score;
 import com.gdp.codetest.repository.ScoreRepository;
 import com.gdp.codetest.service.servicelist.ScoreServices;
 
+@Service
 public class ScoreServiceImpl implements ScoreServices<Score> {
     private final ScoreRepository scoreRepository;
 
@@ -18,7 +20,12 @@ public class ScoreServiceImpl implements ScoreServices<Score> {
 
     @Override
     public Boolean Save(Score score) {
-        return scoreRepository.findById(score.getScore_id()).isPresent();
+        try {
+            scoreRepository.save(score);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 

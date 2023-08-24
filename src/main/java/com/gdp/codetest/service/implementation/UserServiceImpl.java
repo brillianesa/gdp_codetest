@@ -3,11 +3,13 @@ package com.gdp.codetest.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gdp.codetest.model.User;
 import com.gdp.codetest.repository.UserRepository;
 import com.gdp.codetest.service.servicelist.UserServices;
 
+@Service
 public class UserServiceImpl implements UserServices<User> {
     private final UserRepository userRepository;
 
@@ -18,7 +20,12 @@ public class UserServiceImpl implements UserServices<User> {
 
     @Override
     public Boolean Save(User user) {
-        return userRepository.findById(user.getUser_id()).isPresent();
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 

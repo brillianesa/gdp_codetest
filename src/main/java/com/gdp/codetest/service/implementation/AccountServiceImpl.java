@@ -3,11 +3,13 @@ package com.gdp.codetest.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gdp.codetest.model.Account;
 import com.gdp.codetest.repository.AccountRepository;
 import com.gdp.codetest.service.servicelist.AccountServices;
 
+@Service
 public class AccountServiceImpl implements AccountServices<Account> {
     private final AccountRepository accountRepository;
 
@@ -18,7 +20,12 @@ public class AccountServiceImpl implements AccountServices<Account> {
 
     @Override
     public Boolean Save(Account account) {
-        return accountRepository.findById(account.getAccount_id()).isPresent();
+        try {
+            accountRepository.save(account);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

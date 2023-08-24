@@ -3,11 +3,13 @@ package com.gdp.codetest.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gdp.codetest.model.Role;
 import com.gdp.codetest.repository.RoleRepository;
 import com.gdp.codetest.service.servicelist.RoleServices;
 
+@Service
 public class RoleServiceImpl implements RoleServices<Role> {
     private final RoleRepository roleRepository;
 
@@ -18,8 +20,12 @@ public class RoleServiceImpl implements RoleServices<Role> {
 
     @Override
     public Boolean Save(Role role) {
-        return roleRepository.findById(role.getRole_id()).isPresent();
-
+        try {
+            roleRepository.save(role);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
