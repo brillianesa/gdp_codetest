@@ -3,7 +3,6 @@ package com.gdp.codetest.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gdp.codetest.model.Account;
@@ -22,7 +21,12 @@ public class AccountServiceImpl implements AccountServices<Account> {
 
     @Override
     public Boolean Save(Account account) {
-        return accountRepository.findById(account.getAccount_id()).isPresent();
+        try {
+            accountRepository.save(account);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

@@ -15,13 +15,47 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;
-    private String fullName;
+    private String fullname;
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public Date getDateofbirth() {
+        return dateofbirth;
+    }
+
+    public void setDateofbirth(Date dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
+    private Date dateofbirth;
     private String address;
-    private String phoneNumber;
+    private String phonenumber;
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
     private String gender;
-    private Boolean isCompleted;
+    private Boolean iscompleted;
+
+    public Boolean getIscompleted() {
+        return iscompleted;
+    }
+
+    public void setIscompleted(Boolean iscompleted) {
+        this.iscompleted = iscompleted;
+    }
 
     @OneToOne(mappedBy = "user")
     @JsonIgnore
@@ -31,75 +65,5 @@ public class User {
     @JoinColumn(name = "test_id")
     private Test test;
 
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Boolean getIsCompleted() {
-        return isCompleted;
-    }
-
-    public void setIsCompleted(Boolean isCompleted) {
-        this.isCompleted = isCompleted;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
-    }
+   
 }

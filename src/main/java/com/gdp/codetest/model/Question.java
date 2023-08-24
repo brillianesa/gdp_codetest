@@ -14,8 +14,25 @@ public class Question {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer question_id;
-    private String correctAnswer;
-    private String questionDetail;
+    private String correctanswer;
+    private String questiondetail;
+
+    public String getCorrectanswer() {
+        return correctanswer;
+    }
+
+    public void setCorrectanswer(String correctanswer) {
+        this.correctanswer = correctanswer;
+    }
+
+    public String getQuestiondetail() {
+        return questiondetail;
+    }
+
+    public void setQuestiondetail(String questiondetail) {
+        this.questiondetail = questiondetail;
+    }
+
     private String image;
 
     @OneToMany(mappedBy = "question")
@@ -32,22 +49,6 @@ public class Question {
 
     public void setQuestion_id(Integer question_id) {
         this.question_id = question_id;
-    }
-
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-
-    public String getQuestionDetail() {
-        return questionDetail;
-    }
-
-    public void setQuestionDetail(String questionDetail) {
-        this.questionDetail = questionDetail;
     }
 
     public String getImage() {

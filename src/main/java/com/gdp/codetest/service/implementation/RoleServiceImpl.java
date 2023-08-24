@@ -20,8 +20,12 @@ public class RoleServiceImpl implements RoleServices<Role> {
 
     @Override
     public Boolean Save(Role role) {
-        return roleRepository.findById(role.getRole_id()).isPresent();
-
+        try {
+            roleRepository.save(role);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

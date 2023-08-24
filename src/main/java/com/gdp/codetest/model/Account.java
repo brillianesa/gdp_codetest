@@ -15,7 +15,7 @@ public class Account {
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "account_id")
     private User user;
 
     @ManyToOne
