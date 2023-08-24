@@ -1,7 +1,6 @@
 package com.gdp.codetest.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,6 +24,14 @@ public class User {
         this.fullname = fullname;
     }
 
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
     public Date getDateofbirth() {
         return dateofbirth;
     }
@@ -36,6 +43,38 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateofbirth;
     private String address;
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
     private String phonenumber;
 
     public String getPhonenumber() {

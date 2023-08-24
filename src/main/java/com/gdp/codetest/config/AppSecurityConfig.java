@@ -26,6 +26,7 @@ public class AppSecurityConfig {
                     try {
                         auth
                                 .antMatchers("/api/user/**").permitAll()
+                                .antMatchers("**").permitAll()
                                 .anyRequest().authenticated()
                                 .and()
                                 .formLogin()

@@ -1,8 +1,9 @@
 package com.gdp.codetest.controller;
 
 import com.gdp.codetest.dto.LoginRequest;
-// import com.gdp.codetest.dto.RegisterRequest;
+import com.gdp.codetest.dto.RegisterRequest;
 import com.gdp.codetest.handler.Response;
+import com.gdp.codetest.model.Account;
 import com.gdp.codetest.service.servicelist.AccountServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class AccountRestController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    // @Autowired
-    // private AccountServices accountServices;
+    @Autowired
+    private AccountServices<Account> accountServices;
 
     @PostMapping("user/login") // http://localhost:8088/api/user/login
     public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest) {
@@ -37,14 +38,14 @@ public class AccountRestController {
         return Response.generate(HttpStatus.UNAUTHORIZED, "data failed to login");
     }
 
-    // @PostMapping("user/register") // http://localhost:8088/api/user//register
-    // public ResponseEntity<Object> register(@RequestBody RegisterRequest registerRequest) {
-    //     Boolean result = accountServices.register(registerRequest);
-    //     if (result) {
-    //         return Response.generate(HttpStatus.OK, "data has been saved");
-    //     }
-    //     return Response.generate(HttpStatus.OK, "data failed to save");
-    // }
+    @PostMapping("user/register") // http://localhost:8088/api/user//register
+    public ResponseEntity<Object> register(@RequestBody RegisterRequest registerRequest) {
+        Boolean result = accountServices.register(registerRequest);
+        if (result) {
+             return Response.generate(HttpStatus.OK, "data has been saved");
+        }
+        return Response.generate(HttpStatus.OK, "data failed to save");
+    }
 
     @PostMapping("user/forgot") // http://localhost:8088//api/user/forgot
     public String forgotPassword() {
