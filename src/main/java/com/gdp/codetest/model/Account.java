@@ -22,6 +22,22 @@ public class Account {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Score> getScore() {
+        return score;
+    }
+
+    public void setScore(List<Score> score) {
+        this.score = score;
+    }
+
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     private List<Score> score;

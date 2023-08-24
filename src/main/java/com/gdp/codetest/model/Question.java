@@ -25,6 +25,22 @@ public class Question {
         this.correctanswer = correctanswer;
     }
 
+    public List<Score> getScore() {
+        return score;
+    }
+
+    public void setScore(List<Score> score) {
+        this.score = score;
+    }
+
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
     public String getQuestiondetail() {
         return questiondetail;
     }
