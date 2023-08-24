@@ -22,26 +22,6 @@ public class Account {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Score> getScore() {
-        return score;
-    }
-
-    public void setScore(List<Score> score) {
-        this.score = score;
-    }
-
-    @OneToMany(mappedBy = "account")
-    @JsonIgnore
-    private List<Score> score;
-
     public Integer getAccount_id() {
         return account_id;
     }
@@ -81,17 +61,6 @@ public class Account {
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public List<Score> getScore() {
-        return score;
-    }
-
-    public void setScore(List<Score> score) {
-        this.score = score;
-    }
-
-
-    
 
 
 }
