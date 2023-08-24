@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserServices<User> {
             return false;
         }
     }
+
+    @Override
+    public Integer findIdByPhoneNumber(String phoneNumber) {
+        return userRepository.findIdByPhoneNumber(phoneNumber);
+    }
 }

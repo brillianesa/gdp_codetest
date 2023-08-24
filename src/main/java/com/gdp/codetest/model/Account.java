@@ -50,6 +50,14 @@ public class Account {
         this.password = password;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -57,5 +65,17 @@ public class Account {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public List<Score> getScore() {
+        return score;
+    }
+
+    public void setScore(List<Score> score) {
+        this.score = score;
+    }
+
+
+    
+
 
 }
