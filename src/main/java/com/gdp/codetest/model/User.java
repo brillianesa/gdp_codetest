@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_m_user")
 public class User {
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;
     private String fullName;

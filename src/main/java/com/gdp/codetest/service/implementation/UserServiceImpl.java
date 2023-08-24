@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gdp.codetest.model.Test;
 import com.gdp.codetest.model.User;
 import com.gdp.codetest.repository.UserRepository;
 import com.gdp.codetest.service.servicelist.UserServices;

@@ -4,13 +4,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.springframework.data.annotation.Id;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_m_account")
 public class Account {
+    @Id
     private Integer account_id;
     private String email;
     private String password;

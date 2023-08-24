@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gdp.codetest.model.Question;
 import com.gdp.codetest.model.Role;
 import com.gdp.codetest.repository.RoleRepository;
 import com.gdp.codetest.service.servicelist.RoleServices;

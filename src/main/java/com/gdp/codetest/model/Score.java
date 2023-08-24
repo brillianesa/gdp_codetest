@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_tr_score")
 public class Score {
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer score_id;
     private Integer score;

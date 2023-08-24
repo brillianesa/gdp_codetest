@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_tr_test")
 public class Test {
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer test_id;
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -18,7 +18,6 @@ public class QuestionServiceImpl implements QuestionServices<Question> {
 
     @Override
     public Boolean Save(Question question) {
-
         return questionRepository.findById(question.getQuestion_id()).isPresent();
 
     }
