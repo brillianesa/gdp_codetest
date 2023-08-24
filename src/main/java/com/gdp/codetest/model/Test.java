@@ -18,7 +18,15 @@ public class Test {
     private Integer test_id;
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date testdate;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @OneToMany(mappedBy = "test")
     @JsonIgnore
@@ -44,11 +52,4 @@ public class Test {
         this.name = name;
     }
 
-    public Date getTestdate() {
-        return testdate;
-    }
-
-    public void setTestdate(Date testdate) {
-        this.testdate = testdate;
-    }
 }
