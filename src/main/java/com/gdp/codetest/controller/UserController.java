@@ -31,11 +31,13 @@ public class UserController {
     @GetMapping(value = { "form", "form/{id}" })
     public String form(@PathVariable(required = false) Integer id, Model model) {
         if (id != null) {
+
+            model.addAttribute("tests", testServices.getAll());
             model.addAttribute("users", userServices.Get(id));
-            model.addAttribute("tests", testServices.getAll());
         } else {
-            model.addAttribute("users", new User());
+
             model.addAttribute("tests", testServices.getAll());
+            model.addAttribute("users", new User());
         }
         return "user/form";
     }
