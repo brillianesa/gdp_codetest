@@ -1,8 +1,11 @@
 package com.gdp.codetest.dto;
 
+import com.gdp.codetest.model.Role;
+
 public class LoginRequest {
     private String email;
     private String password;
+    
     
     public String getEmail() {
         return email;

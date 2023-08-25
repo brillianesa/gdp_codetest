@@ -3,6 +3,7 @@ package com.gdp.codetest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import com.gdp.codetest.model.Role;
 import com.gdp.codetest.service.servicelist.AccountServices;
 import com.gdp.codetest.service.servicelist.RoleServices;
 
+@CrossOrigin
 @Controller
 @RequestMapping("account")
 public class AccountController {

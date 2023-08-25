@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class AppSecurityConfig {
@@ -27,14 +28,17 @@ public class AppSecurityConfig {
                         auth
                                 .antMatchers("/api/user/**").permitAll()
                                 .antMatchers("**").permitAll()
+                                .antMatchers("/admin/**").hasAnyAuthority("Admin")
+                                .antMatchers("/taker/**").hasAnyAuthority("Taker")
                                 .anyRequest().authenticated()
                                 .and()
-                                .formLogin()
-                                .loginPage("/user/login")
+                                .formLogin().permitAll()
+                                .loginPage("http://localhost:3000/login").loginProcessingUrl("/user/login").defaultSuccessUrl("http://localhost:3000/", true)
                                 .and()
                                 .httpBasic()
                                 .and()
-                                .logout();
+                                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/login");
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
