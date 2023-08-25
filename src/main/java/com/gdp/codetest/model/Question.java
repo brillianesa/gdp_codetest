@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.springframework.data.annotation.Id;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
