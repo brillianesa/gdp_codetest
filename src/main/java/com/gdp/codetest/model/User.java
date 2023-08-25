@@ -66,14 +66,6 @@ public class User {
     @JoinColumn(name = "test_id")
     private Test test;
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public Test getTest() {
         return test;
     }
@@ -104,6 +96,14 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }
