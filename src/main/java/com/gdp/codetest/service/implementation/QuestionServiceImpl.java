@@ -48,10 +48,4 @@ public class QuestionServiceImpl implements QuestionServices<Question> {
             return false;
         }
     }
-
-    @Override
-    public List<Question> findQuestionByTest(Integer test_id) {
-        return questionRepository.findQuestionByTest(test_id);
-    }
-
 }

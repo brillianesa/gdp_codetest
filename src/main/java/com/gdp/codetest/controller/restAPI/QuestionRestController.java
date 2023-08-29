@@ -33,11 +33,6 @@ public class QuestionRestController {
         return Response.generate(HttpStatus.OK, "Data retrieved", questionServices.Get(id));
     }
 
-     @GetMapping("question/test/{test_id}")
-    public ResponseEntity<Object> getTest(@PathVariable(required = true) Integer test_id) {
-        return Response.generate(HttpStatus.OK, "Data retrieved", questionServices.findQuestionByTest(test_id));
-    }
-
     @PostMapping("question")
     public ResponseEntity<Object> post(@RequestBody Question question) {
         questionServices.Save(question);

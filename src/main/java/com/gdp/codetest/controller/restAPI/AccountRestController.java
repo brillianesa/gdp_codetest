@@ -4,10 +4,8 @@ import com.gdp.codetest.dto.LoginRequest;
 import com.gdp.codetest.dto.RegisterRequest;
 import com.gdp.codetest.handler.Response;
 import com.gdp.codetest.model.Account;
-import com.gdp.codetest.model.User;
-import com.gdp.codetest.model.Account;
+import com.gdp.codetest.model.Question;
 import com.gdp.codetest.service.servicelist.AccountServices;
-import com.gdp.codetest.service.servicelist.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api") 
+@RequestMapping("api")
 public class AccountRestController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -35,40 +33,7 @@ public class AccountRestController {
     @Autowired
     private AccountServices<Account> accountServices;
 
-    @Autowired
-    private UserServices<User> userServices;
-
-
-    @PostMapping("account/login") 
-    public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest) {
-            Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        if (authentication.isAuthenticated()) {
-            return Response.generate(HttpStatus.OK, "account has been login");
-        }
-        return Response.generate(HttpStatus.UNAUTHORIZED, "data failed to login");
-    }
-
-    @PostMapping(value = "account/register", params = {"registerRequest"})
-    public ResponseEntity<Object> register(@RequestBody RegisterRequest registerRequest) {
-        Boolean result = accountServices.register(registerRequest);
-        if (result) {
-             return Response.generate(HttpStatus.OK, "data has been saved");
-        }
-        return Response.generate(HttpStatus.OK, "data failed to save");
-    }
-
-    // @PostMapping(value = "account/register", params = {"account", "user"})
-    // public ResponseEntity<Object> post(@RequestBody RegisterRequest registerRequest, @RequestBody Account account, @RequestBody User user) {
-    //     Boolean result = accountServices.register(registerRequest, account, user);
-    //     if (result) {
-    //          return Response.generate(HttpStatus.OK, "data has been saved");
-    //     }
-    //     return Response.generate(HttpStatus.OK, "data failed to save");
-    // }
-
-     @GetMapping("account")
+    @GetMapping("account")
     public ResponseEntity<Object> get() {
         return Response.generate(HttpStatus.OK, "Data retrieved", accountServices.getAll());
     }
@@ -77,7 +42,6 @@ public class AccountRestController {
     public ResponseEntity<Object> get(@PathVariable(required = true) Integer id) {
         return Response.generate(HttpStatus.OK, "Data retrieved", accountServices.Get(id));
     }
-    
 
     @PostMapping("account")
     public ResponseEntity<Object> post(@RequestBody Account account) {
@@ -85,13 +49,30 @@ public class AccountRestController {
         return Response.generate(HttpStatus.OK, "Data saved");
     }
 
-
-
     @DeleteMapping("account/{id}")
     public ResponseEntity<Object> delete(@PathVariable(required = true) Integer id) {
         accountServices.Delete(id);
         return Response.generate(HttpStatus.OK, "Data deleted");
     }
 
+    @PostMapping("account/login")
+    public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager
+                .authenticate(
+                        new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        if (authentication.isAuthenticated()) {
+            return Response.generate(HttpStatus.OK, "Signed in");
+        }
+        return Response.generate(HttpStatus.UNAUTHORIZED, "Data failed to login");
+    }
 
+    @PostMapping("account/register")
+    public ResponseEntity<Object> register(@RequestBody RegisterRequest registerRequest) {
+        Boolean result = accountServices.register(registerRequest);
+        if (result) {
+            return Response.generate(HttpStatus.OK, "Data has been saved");
+        }
+        return Response.generate(HttpStatus.OK, "Data failed to save");
+    }
 }

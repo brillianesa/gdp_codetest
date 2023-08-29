@@ -49,5 +49,4 @@ public class ScoreServiceImpl implements ScoreServices<Score> {
         }
     }
 
-    
 }
