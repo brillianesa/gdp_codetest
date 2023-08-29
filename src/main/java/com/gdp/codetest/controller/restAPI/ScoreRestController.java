@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gdp.codetest.handler.Response;
 import com.gdp.codetest.model.Score;
+import com.gdp.codetest.repository.ScoreRepository;
 import com.gdp.codetest.service.servicelist.ScoreServices;
 
 @CrossOrigin
@@ -22,6 +23,9 @@ import com.gdp.codetest.service.servicelist.ScoreServices;
 public class ScoreRestController {
     @Autowired
     private ScoreServices<Score> scoreServices;
+
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     @GetMapping("score")
     public ResponseEntity<Object> get() {
@@ -43,5 +47,10 @@ public class ScoreRestController {
     public ResponseEntity<Object> delete(@PathVariable(required = true) Integer id) {
         scoreServices.Delete(id);
         return Response.generate(HttpStatus.OK, "Data deleted");
+    }
+
+    @GetMapping("score/account/{id}")
+    public ResponseEntity<Object> getScore(@PathVariable(required = true) Integer id) {
+        return Response.generate(HttpStatus.OK, "Data retrieved", scoreRepository.findScoreByAccountID(id));
     }
 }

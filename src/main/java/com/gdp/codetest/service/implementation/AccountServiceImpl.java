@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.gdp.codetest.dto.RegisterRequest;
 import com.gdp.codetest.model.Account;
+import com.gdp.codetest.model.Question;
+import com.gdp.codetest.model.Score;
 import com.gdp.codetest.model.User;
 import com.gdp.codetest.repository.AccountRepository;
+import com.gdp.codetest.repository.QuestionRepository;
+import com.gdp.codetest.repository.ScoreRepository;
 import com.gdp.codetest.service.servicelist.AccountServices;
 import com.gdp.codetest.service.servicelist.UserServices;
 
@@ -18,7 +22,11 @@ public class AccountServiceImpl implements AccountServices<Account> {
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
+    private QuestionRepository questionRepository;
+    @Autowired
     private UserServices<User> userServices;
+    @Autowired
+    private ScoreRepository scoreRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -60,16 +68,29 @@ public class AccountServiceImpl implements AccountServices<Account> {
         user.setPhonenumber(registerRequest.getPhonenumber());
         user.setGender(registerRequest.getGender());
         user.setAddress(registerRequest.getAddress());
+        user.setTest(registerRequest.getTest());
 
         Boolean resultUser = userServices.Save(user);
-        if(resultUser){
+        if (resultUser) {
             Account account = new Account();
             Integer account_id = userServices.findIdByPhoneNumber(registerRequest.getPhonenumber());
             account.setAccount_id(account_id);
             account.setEmail(registerRequest.getEmail());
             account.setPassword(passwordEncoder.encode((registerRequest.getPassword())));
+            account.setRole(registerRequest.getRole());
 
             accountRepository.save(account);
+
+            Integer testId = user.getTest().getTest_id();
+            List<Question> questions = questionRepository.findByTestId(testId);
+
+            for (Question question : questions) {
+                Score score = new Score();
+                score.setAccount(account);
+                score.setQuestion(question);
+                score.setScore(null);
+                scoreRepository.save(score);
+            }
         }
         return resultUser;
     }

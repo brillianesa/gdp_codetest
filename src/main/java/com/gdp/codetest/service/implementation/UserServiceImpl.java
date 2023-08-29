@@ -5,13 +5,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gdp.codetest.model.Account;
+import com.gdp.codetest.model.Question;
+import com.gdp.codetest.model.Score;
 import com.gdp.codetest.model.User;
+import com.gdp.codetest.repository.AccountRepository;
+import com.gdp.codetest.repository.ScoreRepository;
 import com.gdp.codetest.repository.UserRepository;
 import com.gdp.codetest.service.servicelist.UserServices;
 
 @Service
 public class UserServiceImpl implements UserServices<User> {
+    @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -53,4 +65,5 @@ public class UserServiceImpl implements UserServices<User> {
     public Integer findIdByPhoneNumber(String phoneNumber) {
         return userRepository.findIdByPhoneNumber(phoneNumber);
     }
+
 }

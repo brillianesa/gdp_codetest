@@ -16,6 +16,7 @@
             >CREATE</a>
             <tr>
                 <th>ID</th>
+                <th>ID Test Taker</th>
                 <th>FULL NAME</th>
                 <th>IMAGE</th>
                 <th>QUESTION</th>
@@ -26,7 +27,8 @@
             </tr>
             <tbody>
                 <tr th:each="score : ${scores}">
-                    <td th:text="${score.score_id}">ID</td>
+                    <td th:text="${score.score_id}">Question ID</td>
+                    <td th:text="${score.account.account_id}">Test Taker ID</td>
                     <td th:text="${score.account.user.getFullname()}">FULL NAME</td>
                     <td th:text="${score.question.getImage()}">IMAGE</td>
                     <td th:text="${score.question.getQuestiondetail()}">QUESTION</td>

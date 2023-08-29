@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_m_account")
 public class Account {
-    @Id
+    @javax.persistence.Id
     private Integer account_id;
     private String email;
     private String password;
@@ -61,6 +61,5 @@ public class Account {
     public void setRole(Role role) {
         this.role = role;
     }
-
 
 }
