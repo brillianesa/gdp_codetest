@@ -26,7 +26,7 @@ public class AppSecurityConfig {
                 .authorizeHttpRequests((auth) -> {
                     try {
                         auth
-                                .antMatchers("/api/user/**").permitAll()
+                                .antMatchers("/api/account/**").permitAll().antMatchers("/api/user/**").permitAll()
                                 .antMatchers("**").permitAll()
                                 .antMatchers("http://localhost:3000/user").hasAnyAuthority("Admin")
                                 .antMatchers("/taker/**").hasAnyAuthority("Taker")

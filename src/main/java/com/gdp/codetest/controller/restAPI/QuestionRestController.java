@@ -28,18 +28,23 @@ public class QuestionRestController {
         return Response.generate(HttpStatus.OK, "Data retrieved", questionServices.getAll());
     }
 
-    @GetMapping("admin/question/{id}")
+    @GetMapping("question/{id}")
     public ResponseEntity<Object> get(@PathVariable(required = true) Integer id) {
         return Response.generate(HttpStatus.OK, "Data retrieved", questionServices.Get(id));
     }
 
-    @PostMapping("admin/question")
+     @GetMapping("question/test/{test_id}")
+    public ResponseEntity<Object> getTest(@PathVariable(required = true) Integer test_id) {
+        return Response.generate(HttpStatus.OK, "Data retrieved", questionServices.findQuestionByTest(test_id));
+    }
+
+    @PostMapping("question")
     public ResponseEntity<Object> post(@RequestBody Question question) {
         questionServices.Save(question);
         return Response.generate(HttpStatus.OK, "Data saved");
     }
 
-    @DeleteMapping("admin/question/{id}")
+    @DeleteMapping("question/{id}")
     public ResponseEntity<Object> delete(@PathVariable(required = true) Integer id) {
         questionServices.Delete(id);
         return Response.generate(HttpStatus.OK, "Data deleted");

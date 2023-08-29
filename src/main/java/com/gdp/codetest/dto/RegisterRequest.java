@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.gdp.codetest.model.Role;
+import com.gdp.codetest.model.Test;
 
 public class RegisterRequest {
     private String email;
@@ -21,7 +22,14 @@ public class RegisterRequest {
     private String phonenumber;
     private String password;
     private Role role;
+    private Test test;
 
+    public Test getTest() {
+        return test;
+    }
+    public void setTest(Test test) {
+        this.test = test;
+    }
     public String getGender() {
         return gender;
     }

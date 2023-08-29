@@ -4,7 +4,10 @@ import com.gdp.codetest.dto.LoginRequest;
 import com.gdp.codetest.dto.RegisterRequest;
 import com.gdp.codetest.handler.Response;
 import com.gdp.codetest.model.Account;
+import com.gdp.codetest.model.User;
+import com.gdp.codetest.model.Account;
 import com.gdp.codetest.service.servicelist.AccountServices;
+import com.gdp.codetest.service.servicelist.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +17,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +35,9 @@ public class AccountRestController {
     @Autowired
     private AccountServices<Account> accountServices;
 
+    @Autowired
+    private UserServices<User> userServices;
+
 
     @PostMapping("account/login") 
     public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest) {
@@ -42,7 +50,7 @@ public class AccountRestController {
         return Response.generate(HttpStatus.UNAUTHORIZED, "data failed to login");
     }
 
-    @PostMapping("account/register")
+    @PostMapping(value = "account/register", params = {"registerRequest"})
     public ResponseEntity<Object> register(@RequestBody RegisterRequest registerRequest) {
         Boolean result = accountServices.register(registerRequest);
         if (result) {
@@ -50,4 +58,40 @@ public class AccountRestController {
         }
         return Response.generate(HttpStatus.OK, "data failed to save");
     }
+
+    // @PostMapping(value = "account/register", params = {"account", "user"})
+    // public ResponseEntity<Object> post(@RequestBody RegisterRequest registerRequest, @RequestBody Account account, @RequestBody User user) {
+    //     Boolean result = accountServices.register(registerRequest, account, user);
+    //     if (result) {
+    //          return Response.generate(HttpStatus.OK, "data has been saved");
+    //     }
+    //     return Response.generate(HttpStatus.OK, "data failed to save");
+    // }
+
+     @GetMapping("account")
+    public ResponseEntity<Object> get() {
+        return Response.generate(HttpStatus.OK, "Data retrieved", accountServices.getAll());
+    }
+
+    @GetMapping("account/{id}")
+    public ResponseEntity<Object> get(@PathVariable(required = true) Integer id) {
+        return Response.generate(HttpStatus.OK, "Data retrieved", accountServices.Get(id));
+    }
+    
+
+    @PostMapping("account")
+    public ResponseEntity<Object> post(@RequestBody Account account) {
+        accountServices.Save(account);
+        return Response.generate(HttpStatus.OK, "Data saved");
+    }
+
+
+
+    @DeleteMapping("account/{id}")
+    public ResponseEntity<Object> delete(@PathVariable(required = true) Integer id) {
+        accountServices.Delete(id);
+        return Response.generate(HttpStatus.OK, "Data deleted");
+    }
+
+
 }

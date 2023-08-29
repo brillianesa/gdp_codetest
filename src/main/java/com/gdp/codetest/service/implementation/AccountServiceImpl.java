@@ -60,6 +60,7 @@ public class AccountServiceImpl implements AccountServices<Account> {
         user.setPhonenumber(registerRequest.getPhonenumber());
         user.setGender(registerRequest.getGender());
         user.setAddress(registerRequest.getAddress());
+        user.setTest(registerRequest.getTest());
 
         Boolean resultUser = userServices.Save(user);
         if(resultUser){
@@ -68,9 +69,32 @@ public class AccountServiceImpl implements AccountServices<Account> {
             account.setAccount_id(account_id);
             account.setEmail(registerRequest.getEmail());
             account.setPassword(passwordEncoder.encode((registerRequest.getPassword())));
+            account.setRole(registerRequest.getRole());
 
             accountRepository.save(account);
         }
         return resultUser;
     }
+
+    // @Override
+    // public boolean register(RegisterRequest registerRequest, Account account, User user) {
+    //     user.setFullname(registerRequest.getFullname());
+    //     user.setDateofbirth(registerRequest.getDateofbirth());
+    //     user.setPhonenumber(registerRequest.getPhonenumber());
+    //     user.setGender(registerRequest.getGender());
+    //     user.setAddress(registerRequest.getAddress());
+    //     user.setTest(registerRequest.getTest());
+
+    //     Boolean resultUser = userServices.Save(user);
+    //     if(resultUser){
+    //         Integer account_id = userServices.findIdByPhoneNumber(registerRequest.getPhonenumber());
+    //         account.setAccount_id(account_id);
+    //         account.setEmail(registerRequest.getEmail());
+    //         account.setPassword(passwordEncoder.encode((registerRequest.getPassword())));
+    //         account.setRole(registerRequest.getRole());
+
+    //         accountRepository.save(account);
+    //     }
+    //     return resultUser;
+    // }
 }

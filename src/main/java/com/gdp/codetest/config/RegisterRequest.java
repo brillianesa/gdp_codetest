@@ -10,7 +10,8 @@ public class RegisterRequest {
     private String address;
     private String phoneNumber;
     private String gender;
-    private Boolean isCompleted;
+    private Boolean isCompleted;    
+
     public String getEmail() {
         return email;
     }
