@@ -69,7 +69,6 @@ public class AccountServiceImpl implements AccountServices<Account> {
         user.setGender(registerRequest.getGender());
         user.setAddress(registerRequest.getAddress());
         user.setTest(registerRequest.getTest());
-        user.setIscompleted(registerRequest.getIscompleted());
 
         Boolean resultUser = userServices.Save(user);
         if (resultUser) {
