@@ -3,6 +3,7 @@ package com.gdp.codetest.controller.restAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gdp.codetest.config.CurrentUser;
+import com.gdp.codetest.config.MyUserDetails;
+import com.gdp.codetest.dto.UserSummary;
 import com.gdp.codetest.handler.Response;
 import com.gdp.codetest.model.User;
 import com.gdp.codetest.service.servicelist.UserServices;
@@ -43,5 +47,11 @@ public class UserRestController {
     public ResponseEntity<Object> delete(@PathVariable(required = true) Integer id) {
         userServices.Delete(id);
         return Response.generate(HttpStatus.OK, "Data deleted");
+    }
+
+    @GetMapping("/user/me")
+    public UserSummary getCurrentUser(@CurrentUser MyUserDetails currentUser) {
+        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFullname(), currentUser.getTest_id());
+        return userSummary;
     }
 }

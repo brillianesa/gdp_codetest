@@ -22,6 +22,17 @@ public class MyUserDetails implements UserDetails, UserDetailsService {
     private String username;
     private String password;
     private GrantedAuthority authority;
+    private Integer id;
+    private String fullname;
+    private Integer test_id;
+
+    public Integer getTest_id() {
+        return test_id;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
 
     public MyUserDetails() {}
 
@@ -29,6 +40,9 @@ public class MyUserDetails implements UserDetails, UserDetailsService {
         this.username = account.getEmail();
         this.password = account.getPassword();
         this.authority = new SimpleGrantedAuthority(account.getRole().getName());
+        this.id = account.getAccount_id();
+        this.fullname = account.getUser().getFullname();
+        this.test_id = account.getUser().getTest().getTest_id();
     }
 
     @Override
@@ -43,6 +57,7 @@ public class MyUserDetails implements UserDetails, UserDetailsService {
         Account data = accountRepository.login(username);
         return new MyUserDetails(data);
     }
+    
 
     @Override
     public String getPassword() {
@@ -72,5 +87,17 @@ public class MyUserDetails implements UserDetails, UserDetailsService {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public AccountRepository getAccountRepository() {
+        return accountRepository;
+    }
+
+    public GrantedAuthority getAuthority() {
+        return authority;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

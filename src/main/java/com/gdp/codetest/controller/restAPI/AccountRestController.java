@@ -1,5 +1,7 @@
 package com.gdp.codetest.controller.restAPI;
 
+import com.gdp.codetest.config.JwtTokenProvider;
+import com.gdp.codetest.dto.JwtAuthenticationResponse;
 import com.gdp.codetest.dto.LoginRequest;
 import com.gdp.codetest.dto.RegisterRequest;
 import com.gdp.codetest.handler.Response;
@@ -14,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,12 @@ public class AccountRestController {
 
     @Autowired
     private AccountServices<Account> accountServices;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    JwtTokenProvider tokenProvider;
 
     @GetMapping("account")
     public ResponseEntity<Object> get() {
@@ -62,7 +71,8 @@ public class AccountRestController {
                         new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         if (authentication.isAuthenticated()) {
-            return Response.generate(HttpStatus.OK, "Signed in");
+            String jwt = tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
         }
         return Response.generate(HttpStatus.UNAUTHORIZED, "Data failed to login");
     }
